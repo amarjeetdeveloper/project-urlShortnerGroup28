@@ -114,7 +114,8 @@ const getUrl = async function (req, res) {
         return res
           .status(404)
           .send({ status: false, message: "'not found urlCode'" });
-      await SET_ASYNC(`${req.params.urlCode}`, JSON.stringify(urlCode));
+
+      await SET_ASYNC(`${req.params.urlCode}`, (urlCode));
 
      return res.send({ data: urlData });
     }
