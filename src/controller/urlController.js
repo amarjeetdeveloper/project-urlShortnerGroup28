@@ -65,7 +65,7 @@ const createUrl = async function (req, res) {
       } else {
         let urlCode = shortid.generate().toLowerCase();
 
-        let shortUrl = baseUrl + "/" + urlCode;
+        let shortUrl = baseUrl+"/"+urlCode;
 
         data.urlCode = urlCode;
         data.shortUrl = shortUrl;
@@ -73,7 +73,7 @@ const createUrl = async function (req, res) {
         await urlModel.create(data);
         let saveData = await urlModel
           .findOne({ urlCode: urlCode })
-          .select({ _id: 0, __v: 0 });
+          .select({ _id: 0, __v: 0, createdAt:0,updatedAt:0 });
         await SET_ASYNC(`${goodUrl}`, JSON.stringify(saveData));
         return res.status(201).send({
           status: true,
